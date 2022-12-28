@@ -20,5 +20,7 @@ export class TaskService {
     return this.http.post<Task>(this.apiURL, task);
   }
 
-  
+  completed(id: any, completed: boolean){
+    return this.http.patch(`${this.apiURL}/${id}`, {completed: !completed})
+  }
 }

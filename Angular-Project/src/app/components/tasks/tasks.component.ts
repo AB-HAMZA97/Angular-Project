@@ -45,4 +45,11 @@ export class TasksComponent implements OnInit {
       completed: false
     }
   }
+
+  toggleCompleted(task: Task){
+    this.taskService.completed(task.id, task.completed)
+    .subscribe(() => {
+      task.completed = !task.completed;
+    })
+  }
 }

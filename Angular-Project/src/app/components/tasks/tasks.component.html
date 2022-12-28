@@ -39,7 +39,7 @@
                 </button>
             
                 {{ task.label}}
-                <span class="">
+                <span (click)="toggleCompleted(task)" class="">
                     <i class="fa" [ngClass] = "{
                         'fa-thumbs-up': task.completed,
                         'fa-thumbs-down': !task.completed
