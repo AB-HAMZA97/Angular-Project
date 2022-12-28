@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -7,10 +7,14 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService) {}
   tasks: Task[] = [];
-  
+  myTask: Task = {
+    label: '',
+    completed: false
+  }
+
   ngOnInit(){
     this.getTasks();
   }
@@ -19,11 +23,17 @@ export class TasksComponent {
     this.taskService.findAll()
     .subscribe(tasks => this.tasks = tasks)
   }
-// subscribe c'est une fonsction anonyme.
   deleteTask(id: any) {
     this.taskService.delete(id)
     .subscribe(() => {
       this.tasks = this.tasks.filter(task => task.id != id)
     }) 
+  }
+
+  persistsTask() {
+    this.taskService.persist(this.myTask)
+    .subscribe((task) => {
+      this.tasks = [task, ...this.tasks]
+    })
   }
 }

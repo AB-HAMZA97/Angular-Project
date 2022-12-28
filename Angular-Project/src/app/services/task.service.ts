@@ -15,4 +15,8 @@ export class TaskService {
   delete(id: any) {
     return this.http.delete(`${this.apiURL}/${id}`)
   }
+
+  persist(task: Task) {
+    return this.http.post<Task>(this.apiURL, task);
+  }
 }
