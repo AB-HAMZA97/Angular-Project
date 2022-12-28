@@ -33,7 +33,16 @@ export class TasksComponent implements OnInit {
   persistsTask() {
     this.taskService.persist(this.myTask)
     .subscribe((task) => {
-      this.tasks = [task, ...this.tasks]
+      this.tasks = [task, ...this.tasks];
+      this.resetTask();
     })
+    
+  }
+
+  resetTask() {
+    this.myTask = {
+      label: '',
+      completed: false
+    }
   }
 }
